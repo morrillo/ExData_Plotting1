@@ -4,6 +4,8 @@ data$DateTime <- paste(as.character(data$Date),as.character(data$Time),sep=' ')
 filteredData1 <- subset(data,as.Date(Date) == '2007-02-01')
 filteredData2 <- subset(data,as.Date(Date) == '2007-02-02')
 combinedData <- rbind(filteredData1,filteredData2)
+png('plot4.png')
+par(mfrow=c(2,2))
 # First plot
 plot(strptime(combinedData$DateTime,format="%Y-%m-%d %H:%M:%S"),type="l",as.numeric(as.character(combinedData$Global_active_power)),xlab="",ylab="Global Active Power (kilowatts)")
 # Second plot
@@ -14,3 +16,4 @@ lines(strptime(combinedData$DateTime,format="%Y-%m-%d %H:%M:%S"),as.numeric(comb
 lines(strptime(combinedData$DateTime,format="%Y-%m-%d %H:%M:%S"),as.numeric(combinedData$Sub_metering_3),type="l",col="blue")
 # Fourth plot
 plot(strptime(combinedData$DateTime,format="%Y-%m-%d %H:%M:%S"),type="l",as.numeric(as.character(combinedData$Global_reactive_power)),xlab="datetime",ylab="Global_reactive_power")
+dev.off()
